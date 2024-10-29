@@ -21,6 +21,6 @@
     "ts-jest": "^29.2.5"
   },
   "dependencies": {
-    "ts-dotenv": "^0.9.1"
+    "dotenv": "^16.4.5"
   }
 }

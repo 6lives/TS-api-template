@@ -7,3 +7,5 @@ export type User = {
     avatar: string
 }
 
+
+
