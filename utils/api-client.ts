@@ -5,10 +5,10 @@ import { linkBuilder } from './url-helper';
 
 
 export enum ApiMethod {
-    GET,
-    POST,
-    PATCH,
-    DELETE,
+    GET = "GET",
+    POST = "POST",
+    PATCH = "PATCH",
+    DELETE = "DELETE",
 }
 
 type RequestOptions = {
@@ -32,7 +32,7 @@ export async function callApi<T>(method: ApiMethod, url: string, options?: Reque
 
         try {
             request = await fetch(requestUrl, {
-                method: method.toString(),
+                method: method,
                 headers: options?.headers ? options.headers : undefined,
                 body: ApiMethod.POST || ApiMethod.PATCH ? JSON.stringify(options?.body) : null,
             })
@@ -40,11 +40,11 @@ export async function callApi<T>(method: ApiMethod, url: string, options?: Reque
             response = await request.json()
 
             allure.attachment(randomUUID().toString(),
-                `Request:\n${JSON.stringify(options?.headers, null, 2)}\n${JSON.stringify(options?.body, null, 2)}
-            Response:\n${JSON.stringify(request.headers, null, 2)}\n${JSON.stringify(response, null, 2)}`,
+                `Request:\nHeaders:${JSON.stringify(options?.headers, null, 2)}\nBody:${JSON.stringify(options?.body, null, 2)}
+            Response:\nHeaders:${JSON.stringify(request.headers, null, 2)}\nBody:${JSON.stringify(response, null, 2)}`,
                 allure.ContentType.TEXT)
 
-            if (!request.ok && !options?.statusCode) { throw new Error(`Request is not ok ${method} ${requestUrl} ${response}`) }
+            if (!request.ok && !options?.statusCode) { throw new Error(`Request is not ok ${method.toString()} ${requestUrl} ${response}`) }
             if (options?.statusCode) {
                 expect(request.status).toBe(options.statusCode)
             }

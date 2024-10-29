@@ -7,7 +7,7 @@
   },
   "scripts": {
     "test": "jest",
-    "report": "allure serve allure-results"
+    "report": "allure serve"
   },
   "author": "",
   "license": "ISC",
