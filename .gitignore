@@ -1,0 +1,5 @@
+/node_modules
+/TS-api-template.code-workspace
+/coverage
+.env
+/allure-results
